@@ -337,3 +337,8 @@ void mis_std_parse_fallback(MISParser prs, has_caller_location, const char* form
 }
 ```
 You can define your own parse error fallback function and pass it to `mis_parse`.
+
+---
+Many of text has been translated by Gemini and checked by me later because I'm not English native and it's very hard to me to translate all that text and safe it readable.
+
+Thank you for reading.
