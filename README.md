@@ -6,8 +6,10 @@ MIS can be used in realtime systems such as games, modding, and my fantasy is go
 ## How To Use?
 - Include headers from `include` directory to compiler.
 - Put `mis.c` in your project's code directory.
-- Don't write `#include <mis_tables.h>`, don't look inside `mis_tables.h` and your mental gonna say you "thank".
+- Put `#include <mis.h>` in file that will use MIS.
 - Enjoy!
+
+Note: Don't write `#include <mis_tables.h>`, don't look inside `mis_tables.h` and your mental gonna say you "thank".
 
 # Explanation of MIS Format
 In MIS format, as already mentioned, there are objects and lists, which are "complex values" that can represent an entire file.
