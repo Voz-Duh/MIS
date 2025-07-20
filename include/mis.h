@@ -14,7 +14,16 @@
 
 typedef void (*MISFallbackType)(const char* caller_file, int caller_line, const char* format, ...);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void mis_init(MISFallbackType fallback);
 void mis_std_init();
+
+#ifdef __cplusplus
+}
+#endif
 
 struct __MISSerializerBuilder {
     char* text;
@@ -47,6 +56,9 @@ typedef MISBranchSerializer MISListSerializer;
 typedef MISBranchSerializer MISPropertySerializer; 
 typedef MISBranchSerializer MISObjectSerializer;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 MISSerializer mis_ser_create();
 
 int __mis_ser_object(MISListSerializer* ser, MISObjectSerializer* result, const char* caller_file, int caller_line);
@@ -102,6 +114,9 @@ int __mis_ser_add_fastdouble   (MISBranchSerializer* ser, double value,         
 #define mis_ser_add_boolean(ser, value)               __mis_ser_add_boolean      (ser, value,         __FILE__, __LINE__)
 #define mis_ser_add_fastdouble(ser, value)            __mis_ser_add_fastdouble   (ser, value,         __FILE__, __LINE__)
 
+#ifdef __cplusplus
+}
+#endif
 
 //////////////////////////////////////////////////
 // ---------------- MIS PARSER ---------------- //
@@ -129,6 +144,9 @@ typedef struct {
 
 typedef void (*MISParseFallbackType)(MISParser parser, const char* caller_file, int caller_line, const char* format, ...);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define mis_parse(value, file, fallback, ...) _Generic((value), \
                                                 MISListContainer*:  _Generic((fallback), \
@@ -249,6 +267,10 @@ MISProperty __mis_extract(MISObject object, const char* key);
 MISProperty __mis_extract_container(MISObjectContainer object, const char* key);
 MISProperty __mis_extract_length(MISObject object, const char* key, int key_length);
 MISProperty __mis_extract_length_container(MISObjectContainer object, const char* key, int key_length);
+
+#ifdef __cplusplus
+}
+#endif
 
 // massive getters (unpackers)
 #pragma region Massive getters (unpackers)
