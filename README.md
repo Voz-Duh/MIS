@@ -1,5 +1,5 @@
 # About mis
-MIS is a high-performance library for serializing and parsing data in a human-readable MIS format, inspired by CSS and JSON. It supports lists, objects, booleans, numbers, "fast numbers", strings, keywords, comments, nested comments, references, safe error handling, and logging.
+MIS is a high-performance library for serialization and parsing data of a human-readable MIS format, inspired by CSS and JSON. It supports lists, objects, booleans, numbers, "fast numbers", strings, keywords, comments, nested comments, references, safe error handling, and logging.
 
 MIS can be used in realtime systems such as games, modding, and my fantasy is gone.
 
