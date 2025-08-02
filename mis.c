@@ -3363,6 +3363,8 @@ MISUniversal __parse(MISParser prs, MISParserRootType type, MISParseFallbackType
 
                 check(ch, cur);
                 if (ch) return nulluniversal;
+                if (cur.type == MISU_PROPERTY)
+                cur = cur.list->ptr[0];
                 switch (cur.type)
                 {
                 case MISU_LIST:    cur.type = MISU_LIST_LINK;    break;
