@@ -3372,6 +3372,7 @@ MISUniversal __parse(MISParser prs, MISParserRootType type, MISParseFallbackType
                 case MISU_STRING:  cur.type = MISU_STRING_LINK;  break;
                 case MISU_KEYWORD: cur.type = MISU_KEYWORD_LINK; break;
                 }
+                *ctx.to = cur;
                 ctx.done = true;
                 NEXT_state;
             }
