@@ -9,7 +9,7 @@ MIS can be used in realtime systems such as games, modding, and my fantasy is go
 - Put `#include <mis.h>` in file that will use MIS.
 - Enjoy!
 
-Note: Don't write `#include <mis_tables.h>`, don't look inside `mis_tables.h` and your mental gonna say you "thank".
+Note: Don't write `#include <mis_tables.h>`, don't look inside `mis_tables.h` and your mental will say you "thank".
 
 ## Plans:
 - Fix possible Out Of Memory crashes.
