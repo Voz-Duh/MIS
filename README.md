@@ -92,8 +92,11 @@ Next, MIS has comments and nested comments:
  { Hello! I'm an inner comment! }
 }
 a: 1;
-Next, MIS has references, which start with the > symbol:
+```
 
+---
+Next, MIS has references, which start with the > symbol:
+```
 a: 1;
 link: > a;
 ```
