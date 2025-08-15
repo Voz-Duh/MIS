@@ -11,6 +11,10 @@ MIS can be used in realtime systems such as games, modding, and my fantasy is go
 
 Note: Don't write `#include <mis_tables.h>`, don't look inside `mis_tables.h` and your mental gonna say you "thank".
 
+## Plans:
+- Fix possible Out Of Memory crashes.
+- Find some other issues.
+
 # Explanation of MIS Format
 In MIS format, as already mentioned, there are objects and lists, which are "complex values" that can represent an entire file.
 
