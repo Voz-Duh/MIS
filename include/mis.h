@@ -61,11 +61,11 @@ extern "C" {
 #endif
 MISSerializer mis_ser_create();
 
-int __mis_ser_object(MISListSerializer* ser, MISObjectSerializer* result, const char* caller_file, int caller_line);
-int __mis_ser_list(MISListSerializer* ser, MISListSerializer* result, const char* caller_file, int caller_line);
-int __mis_ser_as_list(MISSerializer* ser, MISListSerializer* result, const char* caller_file, int caller_line);
-int __mis_ser_fin(MISSerializer* ser, const char** result, const char* caller_file, int caller_line);
-int __mis_ser_end(MISBranchSerializer* ser, const char* caller_file, int caller_line);
+int __mis_ser_object (MISListSerializer*   ser, MISObjectSerializer* result, const char* caller_file, int caller_line);
+int __mis_ser_list   (MISListSerializer*   ser, MISListSerializer*   result, const char* caller_file, int caller_line);
+int __mis_ser_as_list(MISSerializer*       ser, MISListSerializer*   result, const char* caller_file, int caller_line);
+int __mis_ser_fin    (MISSerializer*       ser, const char**         result, const char* caller_file, int caller_line);
+int __mis_ser_end    (MISBranchSerializer* ser,                              const char* caller_file, int caller_line);
 
 #define mis_ser_add_object(ser, result) __mis_ser_object(_Generic((ser), MISPropertySerializer*: (MISListSerializer*)ser, default: ser), result, __FILE__, __LINE__)
 #define mis_ser_add_list(ser, result) __mis_ser_list(_Generic((ser), MISPropertySerializer*: (MISListSerializer*)ser, default: ser), result, __FILE__, __LINE__)
@@ -86,18 +86,18 @@ int __mis_ser_property_object_length(MISObjectSerializer* ser, const char* name,
 
 int __mis_ser_add_string_length(MISBranchSerializer* ser, const char* value, int length, const char* caller_file, int caller_line);
 int __mis_ser_add_string       (MISBranchSerializer* ser, const char* value,             const char* caller_file, int caller_line);
-int __mis_ser_add_float        (MISBranchSerializer* ser, float value,                     const char* caller_file, int caller_line);
-int __mis_ser_add_double       (MISBranchSerializer* ser, double value,                     const char* caller_file, int caller_line);
-int __mis_ser_add_int8         (MISBranchSerializer* ser, char value,                      const char* caller_file, int caller_line);
-int __mis_ser_add_int16        (MISBranchSerializer* ser, short value,                     const char* caller_file, int caller_line);
+int __mis_ser_add_float        (MISBranchSerializer* ser, float value,                   const char* caller_file, int caller_line);
+int __mis_ser_add_double       (MISBranchSerializer* ser, double value,                  const char* caller_file, int caller_line);
+int __mis_ser_add_int8         (MISBranchSerializer* ser, char value,                    const char* caller_file, int caller_line);
+int __mis_ser_add_int16        (MISBranchSerializer* ser, short value,                   const char* caller_file, int caller_line);
 int __mis_ser_add_int32        (MISBranchSerializer* ser, int value,                     const char* caller_file, int caller_line);
-int __mis_ser_add_int64        (MISBranchSerializer* ser, long long value,                     const char* caller_file, int caller_line);
-int __mis_ser_add_uint8        (MISBranchSerializer* ser, unsigned char  value,                      const char* caller_file, int caller_line);
-int __mis_ser_add_uint16       (MISBranchSerializer* ser, unsigned short value,                     const char* caller_file, int caller_line);
+int __mis_ser_add_int64        (MISBranchSerializer* ser, long long value,               const char* caller_file, int caller_line);
+int __mis_ser_add_uint8        (MISBranchSerializer* ser, unsigned char  value,          const char* caller_file, int caller_line);
+int __mis_ser_add_uint16       (MISBranchSerializer* ser, unsigned short value,          const char* caller_file, int caller_line);
 int __mis_ser_add_uint32       (MISBranchSerializer* ser, unsigned int value,            const char* caller_file, int caller_line);
-int __mis_ser_add_uint64       (MISBranchSerializer* ser, unsigned long long value,                     const char* caller_file, int caller_line);
-int __mis_ser_add_boolean      (MISBranchSerializer* ser, int value,                    const char* caller_file, int caller_line);
-int __mis_ser_add_fastdouble   (MISBranchSerializer* ser, double value,                     const char* caller_file, int caller_line);
+int __mis_ser_add_uint64       (MISBranchSerializer* ser, unsigned long long value,      const char* caller_file, int caller_line);
+int __mis_ser_add_boolean      (MISBranchSerializer* ser, int value,                     const char* caller_file, int caller_line);
+int __mis_ser_add_fastdouble   (MISBranchSerializer* ser, double value,                  const char* caller_file, int caller_line);
 
 #define mis_ser_add_string_length(ser, value, length) __mis_ser_add_string_length(ser, value, length, __FILE__, __LINE__)
 #define mis_ser_add_string(ser, value)                __mis_ser_add_string       (ser, value,         __FILE__, __LINE__)
@@ -201,56 +201,56 @@ void __mis_free_list(MISList list, const char* caller_file, int caller_line);
 
 // context getter
 #define mis_get(list, i, result) _Generic((result), \
-                                      signed char*:      mis_get_i8(list, i, result), \
-                                      signed short*:     mis_get_i16(list, i, result), \
-                                      signed int*:       mis_get_i32(list, i, result), \
-                                      signed long long*: mis_get_i64(list, i, result), \
-                                    unsigned char*:      mis_get_u8(list, i, result), \
-                                    unsigned short*:     mis_get_u16(list, i, result), \
-                                    unsigned int*:       mis_get_u32(list, i, result), \
-                                    unsigned long long*: mis_get_u64(list, i, result), \
-                                    float*:              mis_get_f32(list, i, result), \
-                                    double*:             mis_get_f64(list, i, result), \
-                                    MISList*:            mis_get_list(list, i, result), \
-                                    MISObject*:          mis_get_object(list, i, result), \
+                                      signed char*:      mis_get_i8     (list, i, result), \
+                                      signed short*:     mis_get_i16    (list, i, result), \
+                                      signed int*:       mis_get_i32    (list, i, result), \
+                                      signed long long*: mis_get_i64    (list, i, result), \
+                                    unsigned char*:      mis_get_u8     (list, i, result), \
+                                    unsigned short*:     mis_get_u16    (list, i, result), \
+                                    unsigned int*:       mis_get_u32    (list, i, result), \
+                                    unsigned long long*: mis_get_u64    (list, i, result), \
+                                    float*:              mis_get_f32    (list, i, result), \
+                                    double*:             mis_get_f64    (list, i, result), \
+                                    MISList*:            mis_get_list   (list, i, result), \
+                                    MISObject*:          mis_get_object (list, i, result), \
                                     MISKeyword*:         mis_get_keyword(list, i, result), \
-                                    const char**:        mis_get_string(list, i, result) \
+                                    const char**:        mis_get_string (list, i, result) \
                                 )
 
 int __mis_len(struct __MISListBase* list);
 int __mis_len_container(MISListContainer list);
 
-int __mis_get_int8 (struct __MISListBase* list, int i, char*  result);
-int __mis_get_int16(struct __MISListBase* list, int i, short* result);
-int __mis_get_int32(struct __MISListBase* list, int i, int* result);
-int __mis_get_int64(struct __MISListBase* list, int i, long long* result);
-int __mis_get_uint8 (struct __MISListBase* list, int i, unsigned char*  result);
-int __mis_get_uint16(struct __MISListBase* list, int i, unsigned short* result);
-int __mis_get_uint32(struct __MISListBase* list, int i, unsigned int* result);
-int __mis_get_uint64(struct __MISListBase* list, int i, unsigned long long* result);
-int __mis_get_float(struct __MISListBase* list, int i, float* result);
-int __mis_get_double(struct __MISListBase* list, int i, double* result);
-int __mis_get_boolean(struct __MISListBase* list, int i, int* result);
-int __mis_get_list(struct __MISListBase* list, int i, MISList* result);
-int __mis_get_object(struct __MISListBase* list, int i, MISObject* result);
-int __mis_get_keyword(struct __MISListBase* list, int i, MISKeyword* result);
-int __mis_get_string(struct __MISListBase* list, int i, const char** result);
+int __mis_get_int8   (struct __MISListBase* list, int i, char*               result);
+int __mis_get_int16  (struct __MISListBase* list, int i, short*              result);
+int __mis_get_int32  (struct __MISListBase* list, int i, int*                result);
+int __mis_get_int64  (struct __MISListBase* list, int i, long long*          result);
+int __mis_get_uint8  (struct __MISListBase* list, int i, unsigned char*      result);
+int __mis_get_uint16 (struct __MISListBase* list, int i, unsigned short*     result);
+int __mis_get_uint32 (struct __MISListBase* list, int i, unsigned int*       result);
+int __mis_get_uint64 (struct __MISListBase* list, int i, unsigned long long* result);
+int __mis_get_float  (struct __MISListBase* list, int i, float*              result);
+int __mis_get_double (struct __MISListBase* list, int i, double*             result);
+int __mis_get_boolean(struct __MISListBase* list, int i, int*                result);
+int __mis_get_list   (struct __MISListBase* list, int i, MISList*            result);
+int __mis_get_object (struct __MISListBase* list, int i, MISObject*          result);
+int __mis_get_keyword(struct __MISListBase* list, int i, MISKeyword*         result);
+int __mis_get_string (struct __MISListBase* list, int i, const char**        result);
 
-int __mis_get_int8_container (MISListContainer list, int i, char*  result);
-int __mis_get_int16_container(MISListContainer list, int i, short* result);
-int __mis_get_int32_container(MISListContainer list, int i, int* result);
-int __mis_get_int64_container(MISListContainer list, int i, long long* result);
-int __mis_get_uint8_container (MISListContainer list, int i, unsigned char*  result);
-int __mis_get_uint16_container(MISListContainer list, int i, unsigned short* result);
-int __mis_get_uint32_container(MISListContainer list, int i, unsigned int* result);
-int __mis_get_uint64_container(MISListContainer list, int i, unsigned long long* result);
-int __mis_get_float_container(MISListContainer list, int i, float* result);
-int __mis_get_double_container(MISListContainer list, int i, double* result);
-int __mis_get_boolean_container(MISListContainer list, int i, int* result);
-int __mis_get_list_container(MISListContainer list, int i, MISList* result);
-int __mis_get_object_container(MISListContainer list, int i, MISObject* result);
-int __mis_get_keyword_container(MISListContainer list, int i, MISKeyword* result);
-int __mis_get_string_container(MISListContainer list, int i, const char** result);
+int __mis_get_int8_container   (MISListContainer list, int i, char*               result);
+int __mis_get_int16_container  (MISListContainer list, int i, short*              result);
+int __mis_get_int32_container  (MISListContainer list, int i, int*                result);
+int __mis_get_int64_container  (MISListContainer list, int i, long long*          result);
+int __mis_get_uint8_container  (MISListContainer list, int i, unsigned char*      result);
+int __mis_get_uint16_container (MISListContainer list, int i, unsigned short*     result);
+int __mis_get_uint32_container (MISListContainer list, int i, unsigned int*       result);
+int __mis_get_uint64_container (MISListContainer list, int i, unsigned long long* result);
+int __mis_get_float_container  (MISListContainer list, int i, float*              result);
+int __mis_get_double_container (MISListContainer list, int i, double*             result);
+int __mis_get_boolean_container(MISListContainer list, int i, int*                result);
+int __mis_get_list_container   (MISListContainer list, int i, MISList*            result);
+int __mis_get_object_container (MISListContainer list, int i, MISObject*          result);
+int __mis_get_keyword_container(MISListContainer list, int i, MISKeyword*         result);
+int __mis_get_string_container (MISListContainer list, int i, const char**        result);
 
 
 #define mis_extract(object, key) _Generic((object), \
@@ -263,478 +263,14 @@ int __mis_get_string_container(MISListContainer list, int i, const char** result
                                     default: __mis_extract_length \
                                 )(object, key, key_length)
 
-MISProperty __mis_extract(MISObject object, const char* key);
-MISProperty __mis_extract_container(MISObjectContainer object, const char* key);
-MISProperty __mis_extract_length(MISObject object, const char* key, int key_length);
+MISProperty __mis_extract                 (MISObject          object, const char* key);
+MISProperty __mis_extract_container       (MISObjectContainer object, const char* key);
+MISProperty __mis_extract_length          (MISObject          object, const char* key, int key_length);
 MISProperty __mis_extract_length_container(MISObjectContainer object, const char* key, int key_length);
 
 #ifdef __cplusplus
 }
 #endif
-
-// massive getters (unpackers)
-#pragma region Massive getters (unpackers)
-#define mis_unpack1 (list, \
-    type1, v1) \
-    (mis_len(list) == 1 \
-    && mis_get(list, 0, v1))
-#define mis_unpack2 (list, \
-    type1, v1, \
-    type2, v2) \
-    (mis_len(list) == 2 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2))
-#define mis_unpack3 (list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3) \
-    (mis_len(list) == 3 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3))
-#define mis_unpack4 (list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4) \
-    (mis_len(list) == 4 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4))
-#define mis_unpack5 (list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5) \
-    (mis_len(list) == 5 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5))
-#define mis_unpack6 (list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6) \
-    (mis_len(list) == 6 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6))
-#define mis_unpack7 (list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7) \
-    (mis_len(list) == 7 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7))
-#define mis_unpack8 (list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8) \
-    (mis_len(list) == 8 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8))
-#define mis_unpack9 (list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9) \
-    (mis_len(list) == 9 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9))
-#define mis_unpack10(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10) \
-    (mis_len(list) == 10 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10))
-#define mis_unpack11(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11) \
-    (mis_len(list) == 11 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11))
-#define mis_unpack12(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12) \
-    (mis_len(list) == 12 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12))
-#define mis_unpack13(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13) \
-    (mis_len(list) == 13 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13))
-#define mis_unpack14(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13, \
-    type14, v14) \
-    (mis_len(list) == 14 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13) \
-    && mis_get(list, 13, v14))
-#define mis_unpack15(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13, \
-    type14, v14, \
-    type15, v15) \
-    (mis_len(list) == 15 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13) \
-    && mis_get(list, 13, v14) \
-    && mis_get(list, 14, v15))
-#define mis_unpack16(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13, \
-    type14, v14, \
-    type15, v15, \
-    type16, v16) \
-    (mis_len(list) == 16 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13) \
-    && mis_get(list, 13, v14) \
-    && mis_get(list, 14, v15) \
-    && mis_get(list, 15, v16))
-#define mis_unpack17(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13, \
-    type14, v14, \
-    type15, v15, \
-    type16, v16, \
-    type17, v17) \
-    (mis_len(list) == 17 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13) \
-    && mis_get(list, 13, v14) \
-    && mis_get(list, 14, v15) \
-    && mis_get(list, 15, v16) \
-    && mis_get(list, 16, v17))
-#define mis_unpack18(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13, \
-    type14, v14, \
-    type15, v15, \
-    type16, v16, \
-    type17, v17, \
-    type18, v18) \
-    (mis_len(list) == 18 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13) \
-    && mis_get(list, 13, v14) \
-    && mis_get(list, 14, v15) \
-    && mis_get(list, 15, v16) \
-    && mis_get(list, 16, v17) \
-    && mis_get(list, 17, v18))
-#define mis_unpack19(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13, \
-    type14, v14, \
-    type15, v15, \
-    type16, v16, \
-    type17, v17, \
-    type18, v18, \
-    type19, v19) \
-    (mis_len(list) == 19 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13) \
-    && mis_get(list, 13, v14) \
-    && mis_get(list, 14, v15) \
-    && mis_get(list, 15, v16) \
-    && mis_get(list, 16, v17) \
-    && mis_get(list, 17, v18) \
-    && mis_get(list, 18, v19))
-#define mis_unpack20(list, \
-    type1, v1, \
-    type2, v2, \
-    type3, v3, \
-    type4, v4, \
-    type5, v5, \
-    type6, v6, \
-    type7, v7, \
-    type8, v8, \
-    type9, v9, \
-    type10, v10, \
-    type11, v11, \
-    type12, v12, \
-    type13, v13, \
-    type14, v14, \
-    type15, v15, \
-    type16, v16, \
-    type17, v17, \
-    type18, v18, \
-    type19, v19, \
-    typ20, v20) \
-    (mis_len(list) == 20 \
-    && mis_get(list, 0, v1) \
-    && mis_get(list, 1, v2) \
-    && mis_get(list, 2, v3) \
-    && mis_get(list, 3, v4) \
-    && mis_get(list, 4, v5) \
-    && mis_get(list, 5, v6) \
-    && mis_get(list, 6, v7) \
-    && mis_get(list, 7, v8) \
-    && mis_get(list, 8, v9) \
-    && mis_get(list, 9, v10) \
-    && mis_get(list, 10, v11) \
-    && mis_get(list, 11, v12) \
-    && mis_get(list, 12, v13) \
-    && mis_get(list, 13, v14) \
-    && mis_get(list, 14, v15) \
-    && mis_get(list, 15, v16) \
-    && mis_get(list, 16, v17) \
-    && mis_get(list, 17, v18) \
-    && mis_get(list, 18, v19) \
-    && mis_get(list, 19, v20))
-#pragma endregion Massive getters (unpackers)
 
 void mis_test();
 
